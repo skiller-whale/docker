@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello Whale</title>
+  </head>
+  <body>
+    <h1>I've built a Docker image!</h1>
+    <button type="button" onClick="getWhale()">Whale hello there!</button>
+    <p id="whalebox"></p>
+    <script>
+      async function getWhale() {
+        var whale
+        try {
+          var response = await fetch("http://localhost:8080/whale")
+          whale = await response.text()
+        } catch (error) {
+          console.log(error)
+          whale = `API error: ${error}`
+        }
+        document.getElementById("whalebox").textContent = whale
+      }
+    </script>
+  </body>
+</html>
