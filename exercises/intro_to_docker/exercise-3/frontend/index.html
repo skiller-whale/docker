@@ -11,7 +11,7 @@
       async function getWhale() {
         var whale
         try {
-          var response = await fetch("http://localhost:8080/whale")
+          var response = await fetch("http://localhost:8082/whale")
           whale = await response.text()
         } catch (error) {
           console.log(error)
