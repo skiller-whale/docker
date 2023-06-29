@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello Whale</title>
+  </head>
+  <body>
+    <!-- TODO 1: Change this.-->
+    <h1>I'm using Docker!</h1>
+    <button type="button" onClick="getRandomWhale()">Get a random whale!</button><br><br>
+    <button type="button" onClick="getAllWhales()">Get all whales!</button><br><br>
+    <form>
+      <label for="whalename">New Whale:</label>
+      <input type="text" id="whalename" name="whalename"><br><br>
+      <input type="button" onClick="addWhale()" value="Add Whale!">
+    </form><br><br>
+    <p id="whalebox"></p>
+    <script>
+      function setDisplayText(text)
+      {
+        document.getElementById("whalebox").textContent = text
+      }
+
+      async function getRandomWhale() {
+        let whale
+        try {
+          const response = await fetch("http://localhost:2001/whales/random")
+          whale = await response.text()
+        } catch (error) {
+          console.log(error)
+          whale = `API error: ${error}`
+        }
+        setDisplayText(whale)
+      }
+
+      async function getAllWhales() {
+        let whale
+        try {
+          const response = await fetch("http://localhost:2001/whales")
+          whale = await response.text()
+        } catch (error) {
+          console.log(error)
+          whale = `API error: ${error}`
+        }
+        setDisplayText(whale)
+      }
+
+      async function addWhale() {
+        const whale_name = document.getElementById("whalename").value
+        let displayText
+        try {
+          const requestOptions = {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ whale_name })
+          }
+          console.log('About to add a thing')
+          const response = await fetch("http://localhost:2001/whales", requestOptions)
+          displayText = `Successfully added ${whale_name}.`
+          console.log('added a thing')
+        } catch (error) {
+          console.log(error)
+          displayText = `Failed to add ${whale_name} - error: ${error}`
+        }
+
+        console.log(displayText)
+        setDisplayText(displayText)
+      }
+    </script>
+  </body>
+</html>
