@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello Whale</title>
+    <title>Hello Whale!</title>
   </head>
   <body>
-    <h1>I've built a Docker image!</h1>
+    <h1 id="congrats">I'm running a Docker container!</h1>
     <button type="button" onClick="getWhale()">Whale hello there!</button>
     <p id="whalebox"></p>
     <script>
       async function getWhale() {
         var whale
         try {
-          var response = await fetch("http://localhost:8082/whale")
+          var response = await fetch("http://localhost:2001/whale")
           whale = await response.text()
+          document.getElementById("congrats").textContent = "I'm running a Docker container and I've built an image!"
         } catch (error) {
           console.log(error)
           whale = `API error: ${error}`
