@@ -8,7 +8,7 @@ services:
       SERVER_URL: "https://train.skillerwhale.com/"
       WATCHER_BASE_PATH: "/app/exercises"
       ATTENDANCE_ID_FILE: "/app/sync/attendance_id"
-      WATCHED_EXTS: "dockerfile .yml html"
+      WATCHED_EXTS: "Dockerfile .yml .yaml .html .js"
       IGNORE_DIRS: ".git"
     volumes:
       - ./exercises:/app/exercises:ro
