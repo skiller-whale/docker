@@ -23,7 +23,7 @@
       async function getRandomWhale() {
         let whale
         try {
-          const response = await fetch("http://localhost:2001/whales/random")
+          const response = await fetch(`http://${window.location.hostname}:2001/whales/random`)
           whale = await response.text()
         } catch (error) {
           console.log(error)
@@ -35,7 +35,7 @@
       async function getAllWhales() {
         let whale
         try {
-          const response = await fetch("http://localhost:2001/whales")
+          const response = await fetch(`http://${window.location.hostname}:2001/whales`)
           whale = await response.text()
         } catch (error) {
           console.log(error)
@@ -54,7 +54,7 @@
               body: JSON.stringify({ whale_name })
           }
           console.log('About to add a thing')
-          const response = await fetch("http://localhost:2001/whales", requestOptions)
+          const response = await fetch(`http://${window.location.hostname}:2001/whales`, requestOptions)
           displayText = `Successfully added ${whale_name}.`
           console.log('added a thing')
         } catch (error) {

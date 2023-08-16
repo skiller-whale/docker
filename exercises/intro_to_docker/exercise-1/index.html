@@ -11,7 +11,7 @@
       async function getWhale() {
         var whale
         try {
-          var response = await fetch("http://localhost:2001/whale")
+          var response = await fetch(`http://${window.location.hostname}:2001/whale`)
           whale = await response.text()
           document.getElementById("congrats").textContent = "I'm running a Docker container and I've built an image!"
         } catch (error) {

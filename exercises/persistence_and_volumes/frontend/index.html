@@ -21,7 +21,7 @@
     async function getAllWhales() {
       let whales
       try {
-        const response = await fetch("http://localhost:2001/whales")
+        const response = await fetch(`http://${window.location.hostname}:2001/whales`)
         whales = await response.text()
       } catch (error) {
         console.log(error)
@@ -39,7 +39,7 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ whale_name })
         }
-        const response = await fetch("http://localhost:2001/whales", requestOptions)
+        const response = await fetch(`http://${window.location.hostname}:2001/whales`, requestOptions)
         infoText = `Successfully added ${whale_name}.`
       } catch (error) {
         console.log(error)
