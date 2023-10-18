@@ -23,26 +23,55 @@ let app
 function configureEndpoints(app)
 {
   app.get("/whales/random", async (req, res) => {
-    const whales = await dao.getAllWhales()
+
+    let whales
+    try {
+      whales = await dao.getAllWhales()
+    } catch (error) {
+      console.error("Failed to get whales from the database")
+      res.sendStatus(500)
+      return
+    }
+
     const randomWhale = whales[Math.floor(Math.random() * whales.length)]
     res.send(randomWhale)
   })
 
   app.post("/whales", async (req, res) => {
     const whale = req.body.whale_name
-    await dao.addWhale(whale)
+
+    try {
+      await dao.addWhale(whale)
+    } catch (error) {
+      console.error("Failed to add whales to the database")
+      res.sendStatus(500)
+      return
+    }
+
     res.send(whale)
   })
 
   app.get("/whales", async (req, res) => {
-    const whales = await dao.getAllWhales()
+    let whales
+    try {
+      whales = await dao.getAllWhales()
+    } catch (error) {
+      console.error("Failed to get whales from the database")
+      res.sendStatus(500)
+      return
+    }
+
     res.send(whales)
   })
 }
 
 async function startServer() {
   //Start DAO (Data Access Object)
-  await dao.start()
+  try {
+    await dao.start()
+  } catch (error) {
+    console.error("Failed to start DAO - continuing, but you may get 500 errors")
+  }
 
   // App
   app = express()

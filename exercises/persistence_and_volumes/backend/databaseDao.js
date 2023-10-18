@@ -20,12 +20,21 @@ async function getPgClient()
         try {
             await pgClient.connect()
 
+            // Set up the error handling for the connection being terminated at some point in the future.
+            pgClient.on('error', (error) => {
+                console.error(error)
+                console.info('Lost DB connection')
+                pgClient = undefined
+            })
+
             await createWhalesTable()
             await populateWhalesTable()
+
+            console.info('Now storing whales in postgres database.')
         } catch (error) {
-            console.error(error)
-            console.info('Failed to initialize DB connection')
+            console.info('Failed to get DB connection')
             pgClient = undefined
+            throw error //Without this, we get reference errors elsewhere in the DAO. This should be throw up to whatever is using the dao so it can handle appropriately.
         }
     }
     return pgClient
@@ -38,7 +47,6 @@ function configure(configuration) {
 async function start()
 {
     await getPgClient()
-    console.info('Now storing whales in postgres database.')
 }
 
 async function getAllWhales()
