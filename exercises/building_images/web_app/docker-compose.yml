@@ -1,0 +1,21 @@
+# docker-compose.yml
+version: '3.7' # This version refers to the version of the docker-compose file specification.
+services:
+  frontend_service:
+    build:
+      context: frontend
+    ports:
+      - 1001:80
+  backend_service:
+    build:
+      context: backend
+    ports:
+      - 2001:8080
+    depends_on:
+      - db_service
+  db_service:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_PASSWORD=123
+    ports:
+      - 5432
