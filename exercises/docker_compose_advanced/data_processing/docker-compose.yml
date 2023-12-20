@@ -1,0 +1,13 @@
+# docker-compose.yml
+version: '3.7' # This version refers to the version of the docker-compose file specification.
+services:
+  db:
+    build:
+      context: db
+    ports:
+      - 5432:5432
+    env_file: db.env
+  postprocess:
+    build:
+      context: postprocess
+    env_file: postprocess.env
