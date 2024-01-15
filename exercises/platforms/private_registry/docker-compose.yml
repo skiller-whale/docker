@@ -1,0 +1,20 @@
+# docker-compose.yml
+version: '3.7' # This version refers to the version of the docker-compose file specification.
+services:
+  local_registry:
+    image: registry
+    ports:
+      - "127.0.0.1:5000:5000"
+  query_catalog:
+    image: curlimages/curl
+    entrypoint: "curl --header 'Accept: application/vnd.oci.image.index.v1+json'"
+    command: local_registry:5000/v2/_catalog
+  query_tags:
+    image: curlimages/curl
+    entrypoint: "curl --header 'Accept: application/vnd.oci.image.index.v1+json'"
+    command: local_registry:5000/v2/goapp/tags/list
+  query_goapp:
+    image: curlimages/curl
+    entrypoint: "curl --header 'Accept: application/vnd.oci.image.index.v1+json'"
+    command: local_registry:5000/v2/goapp/manifests/latest
+      
