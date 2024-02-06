@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  pyserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+        interval: 1s
+        timeout: 2s
+        retries: 100
+  curl_service:
+    image: curlimages/curl
+    command: curl http://pyserver:5000/get_secret
+    depends_on:
+      pyserver:
+        condition: service_healthy

@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  pyserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+  pyserver_secure:
+    build:
+      context: .
+      dockerfile: Dockerfile.secure
+    ports:
+      - 5000:5000
