@@ -5,10 +5,4 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 5000:5000
-  pyserver_secure:
-    build:
-      context: .
-      dockerfile: Dockerfile.secure
-    ports:
-      - 5000:5000
+      - 2001:2001

@@ -5,7 +5,7 @@ RUN pip install flask
 RUN mkdir /secrets
 
 # Bad idea! For exercise purposes only. Don't _ever_ do this in production.
-RUN echo 'supersecret' > /secrets/secret.txt
+RUN echo 'i_am_super_secure' > /secrets/secret.txt
 RUN chmod -R 400 /secrets
 
 WORKDIR /app
