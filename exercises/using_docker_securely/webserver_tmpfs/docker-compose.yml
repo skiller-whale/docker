@@ -1,0 +1,14 @@
+# docker-compose.yml
+version: '3.7' # This version refers to the version of the docker-compose file specification.
+services:
+  webserver:
+    build:
+      context: .
+    ports:
+      - 8001:8001
+    read_only: true
+    volumes:
+      - app_cache:/app/static/cached
+volumes:
+  app_cache:
+    name: sw_ws_cache_volume
