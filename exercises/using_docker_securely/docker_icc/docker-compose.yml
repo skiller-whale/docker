@@ -5,13 +5,13 @@ services:
       context: .
       dockerfile: Dockerfile
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+        test: ["CMD", "curl", "-f", "http://localhost:2001/"]
         interval: 1s
         timeout: 2s
         retries: 100
   compromised_curl_service:
     image: curlimages/curl
-    command: curl http://pyserver:5000/get_secret
+    command: curl http://pyserver:2001/get_secret
     depends_on:
       pyserver:
         condition: service_healthy
