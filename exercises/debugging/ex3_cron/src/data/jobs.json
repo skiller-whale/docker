@@ -1,0 +1,6 @@
+[
+    {
+        "func": "print_unix_time",
+        "interval": 10
+    }
+]
