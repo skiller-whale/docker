@@ -1,0 +1,24 @@
+# docker-compose.yml
+version: '3.7' # This version refers to the version of the docker-compose file specification.
+services:
+  db:
+    build:
+      context: db
+    ports:
+      - 5432:5432
+    env_file: db.env
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 1s
+      retries: 100
+  postprocess:
+    build:
+      context: postprocess
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: postprocess.env
+    volumes:
+      - type: bind
+        source: ./postprocess
+        target: /usr/src/app

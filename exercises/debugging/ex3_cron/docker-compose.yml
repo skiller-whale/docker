@@ -1,0 +1,23 @@
+services:
+  pycron:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # read_only: true
+    volumes:
+      - type: bind
+        source: ./src/data
+        target: /app/data
+      - logs:/var/logs
+    environment:
+      - LOGFILE_PATH=/var/log/jobserver.log
+  log_reader:
+    image: ubuntu:latest
+    command: "/bin/bash -c 'tail -f --retry /var/log/jobserver.log'"
+    read_only: true
+    volumes:
+      - logs:/var/log
+    depends_on:
+      - pycron
+volumes:
+  logs: 
