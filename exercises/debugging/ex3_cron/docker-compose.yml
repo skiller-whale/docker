@@ -4,8 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile
     # read_only: true
-    networks:
-      - pycron_net
     volumes:
       - type: bind
         source: ./src/data
@@ -15,21 +13,11 @@ services:
       - LOGFILE_PATH=/var/log/jobserver.log
   log_reader:
     image: ubuntu:latest
-    command: "/bin/bash -c 'tail -f /var/log/jobserver.log'"
+    command: "/bin/bash -c 'tail -f --retry /var/log/jobserver.log'"
     read_only: true
     volumes:
       - logs:/var/log
-    networks:
-      - log_reader_net
     depends_on:
       - pycron
-    restart: always
-networks:
-  pycron_net:
-    internal: true
-    attachable: false
-  log_reader_net:
-    internal: true
-    attachable: false
 volumes:
   logs: 
