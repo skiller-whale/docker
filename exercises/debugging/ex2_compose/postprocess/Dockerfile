@@ -1,12 +1,12 @@
 FROM node:18.13
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/postprocess
 
 COPY package*.json ./
 
-RUN npm install --prefix ./
+RUN npm install
 
 COPY . .
 
-ENTRYPOINT [ "node" ]
-CMD ["postprocess.js"]
+ENTRYPOINT ["node"]
+CMD ["src/postprocess.js"]
