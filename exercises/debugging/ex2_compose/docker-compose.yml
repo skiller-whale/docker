@@ -20,5 +20,5 @@ services:
     env_file: postprocess.env
     volumes:
       - type: bind
-        source: ./postprocess
-        target: /usr/src/app
+        source: ./postprocess/src
+        target: /usr/src/postprocess/src
