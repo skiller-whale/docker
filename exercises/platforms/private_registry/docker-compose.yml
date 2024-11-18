@@ -1,5 +1,4 @@
 # docker-compose.yml
-version: '3.7' # This version refers to the version of the docker-compose file specification.
 services:
   local_registry:
     image: registry
@@ -17,4 +16,3 @@ services:
     image: curlimages/curl
     entrypoint: "curl --header 'Accept: application/vnd.oci.image.index.v1+json'"
     command: local_registry:5000/v2/goapp/manifests/latest
-      
