@@ -7,7 +7,7 @@ const cors = require("cors")
  * Data Access Object Configuration
  */
 const dao = require('./memoryDao')
-// const dao = require('./databaseDao') //TODO - Networking: Comment this in instead of the line above.
+// const dao = require('./databaseDao') //TODO - Networking: Uncomment this instead of the line above.
 
 // dao.configure({
 //   user:     "postgres",
